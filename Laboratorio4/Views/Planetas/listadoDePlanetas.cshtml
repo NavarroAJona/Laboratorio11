@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "Planetas";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Listado de planetas </title>
+    <meta charset="utf-8" />
+    <!--Esto es un comentario-->
+    <!--En el head se coloca información que es para el navegador, scripts, css-->
+</head>
+<body>
+    <!--Aquí inicia el cuerpo de la página que se está creando (la vista)-->
+    <h1> Listado de planetas </h1>
+
+    <div class="seccion_1" id="s1">
+
+        <table class="table">
+
+            <tr>
+
+                <th> Planeta Id </th>
+
+                <th> Nombre </th>
+
+                <th> Tipo </th>
+
+                <th> Numero de Anillos </th>
+
+                <th> Editar Planeta</th>
+
+                <th> Ver archivo </th>
+
+
+            </tr>
+
+            @for (int numeroPlanetas = 0; numeroPlanetas < @ViewBag.planetas.Count; numeroPlanetas++)
+            {
+                <tr>
+
+                    <td>@ViewBag.planetas[numeroPlanetas].id</td>
+
+                    <td> @ViewBag.planetas[numeroPlanetas].nombre</td>
+
+                    <td> @ViewBag.planetas[numeroPlanetas].tipo</td>
+
+                    <td> @ViewBag.planetas[numeroPlanetas].numeroAnillos</td>
+
+                    <td> @Html.ActionLink("Ver contenido digital", "accederArchivo", new { identificador = @ViewBag.planetas[numeroPlanetas].id },
+                        new {@class = "btn btn-success"})
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("Modificar información", "editarPlaneta",
+                        new { identificador = @ViewBag.planetas[numeroPlanetas].id },
+                        new
+                        {@class = "btn btn alert-info",
+                        @onclick = "return confirm('¿Quiere modificar este planeta?');"}
+                        )
+                    </td>
+
+                </tr>
+            }
+
+        </table>
+
+        <hr />
+
+    </div>
+
+
+</body>
+</html>
+
